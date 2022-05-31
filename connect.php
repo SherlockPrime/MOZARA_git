@@ -8,7 +8,7 @@
 
 
 
-		mysqli_select_db($connect,"chanwhi");
+		mysqli_select_db($connect,"mozara");
 
 		if(!$connect)die("연결에 실패하였습니다.".mysql_error());
 		return $connect;

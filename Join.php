@@ -100,30 +100,32 @@
                                          <form method="post" action="Join_post.php">
                                             <div class="row uniform">
                            <div class="6u 12u$(xsmall)">
-                              <input type="text" name="id" id="id" value"" placeholder="아이디(*)" required />
+                              <input type="text" name="userID" id="id" value"" placeholder="아이디(*)" required />
                            </div>
                            <div class="3u 6u$(xsmall)">
-                              <input type="text" name="rrn" id="rrnF" value"" placeholder="주민등록번호" />
+                              <input type="text" name="userRrn_f" id="rrnF" value"" placeholder="주민등록번호" />
                            </div>
                            <div class="3u 6u$(xsmall)">
-                              <input type="text" name="rrn" id="rrnR" value"" placeholder="주민등록번호" />
+                              <input type="text" name="userRrn_r" id="rrnR" value"" placeholder="주민등록번호" />
                            </div>
 
                            <div class="6u 12u$(xsmall)">
-                              <input type="text" name="name" id="name" value"" placeholder="이름(*)" required />
+                              <input type="text" name="userName" id="name" value"" placeholder="이름(*)" required />
                            </div>
-                           <div class="2u 4u$(xsmall)">
-                              <input type="text" name="phone" id="phone1" value"" placeholder="전화번호(*)" required />
+                           <div class="1u 2u$(xsmall)">
+                              <input type="text" name="userPh_1" id="phone1" value"" placeholder="전화번호(*)" required />
                            </div>
+                           <p>─</p>
                            <div class="2u 4u$(xsmall)">
-                              <input type="text" name="phone" id="phone2" value"" placeholder="전화번호(*)" required />
+                              <input type="text" name="userPh_2" id="phone2" value"" placeholder="전화번호(*)" required />
                            </div>
+                           <p>─</p>
                            <div class="2u 4u$(xsmall)">
-                              <input type="text" name="phone" id="phone3" value"" placeholder="전화번호(*)" required />
+                              <input type="text" name="userPh_3" id="phone3" value"" placeholder="전화번호(*)" required />
                            </div>
 
                                                    <div class="6u 12u$(xsmall)">
-                                             <input type="password" name="pwd" id="pwd" value="" placeholder="비밀번호(*)" required />
+                                             <input type="password" name="userPwd" id="pwd" value="" placeholder="비밀번호(*)" required />
                                                             </div><br />
 
 <!--
@@ -136,7 +138,7 @@
                         -->
 
                         <div class="2u 4u$(xsmall)">
-                           <select name="h_area1" onChange="cat1_change(this.value,h_area2)" >
+                           <select name="userAddr_do" onChange="cat1_change(this.value,h_area2)" >
                               <option value="none">도(*)</option>
                               <option value='1'>서울특별시</option>
                               <option value='2'>부산광역시</option>
@@ -157,27 +159,20 @@
                            </select>
                         </div>
                         <div class="2u 4u$(xsmall)">
-                           <select name="h_area2">
+                           <select name="userAddr_si">
                               <option value="none">시(*)</option>
                            </select>
                         </div>
-                           <div class="2u 4u$(xsmall)">
-                              <input type="text" name="adr" id="adrDet1" value"" placeholder="상세주소(*)" required />
-                           </div>
+                        <div class="2u 4u$(xsmall)">
+                           <input type="text" name="userAddr_doro" id="adrDoro" value"" placeholder="도로명(*)" required />
+                        </div>
 
                            <div class="6u 12u$(xsmall)">
-                              <input type="password" name="pwd" id="pwdCh" value="" placeholder="비밀번호 확인(*)" required />
-                           </div><br />
-                           <div class="2u 4u$(xsmall)">
-                              <input type="text" name="adr" id="adrDoro" value"" placeholder="도로명(*)" required />
+                              <input type="password" name="userPwd_ch" id="pwdCh" value="" placeholder="비밀번호 확인(*)" required />
                            </div>
-                           <div class="4u 8u$(xsmall)">
-                              <input type="text" name="adr" id="adrDet2" value"" placeholder="상세주소(*)" required />
+                           <div class="6u 12u$(xsmall)">
+                              <input type="text" name="userAddr_det" id="userDet" value"" placeholder="상세주소(*)" required />
                            </div>
-
-                              <div class="6u 12u$(xsmall)">
-                                 <input type="text" name="email" id="email" value"" placeholder="이메일(*)" required />
-                              </div>
 
 
 

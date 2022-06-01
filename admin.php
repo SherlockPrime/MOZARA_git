@@ -50,14 +50,28 @@ include("connect.php");
 							<li><a href="order_view.php">주문내역</a></li>
 							<li><a href="contact.php">문의하기</a></li>
 							<?php
-								if ($_SESSION['id'] == "admin")
+
+
+                 $connect= dbconn();
+
+              $id= $_SESSION["id"];
+
+              $query=" select * from usertbl where userID='$id'";
+
+              $result= mysqli_query($connect,$query);
+              $member= mysqli_fetch_array($result);
+
+              if($member["sJob"] != NULL)
+              {
+								if ($member["sJob"] == "관리자")
 								{
 									//echo "<li><a href='board.php'>관리자 설정</a></li>";
 								}
-								else if(($_SESSION['id'] == "worldbest5") || ($_SESSION['id'] == "worldbest6") || ($_SESSION['id'] == "worldbest7"))
+								else
 								{
 									//echo "<li><a href='board.php'>직원 설정</a></li>";
-								}
+					      }
+              }
 							?>
 							<li> <a href='logout.php'> 로그아웃 </a></li>
 					</ul>
@@ -99,27 +113,32 @@ include("connect.php");
 	<iframe src = "" width=90% height=500px name="admin" > </iframe>
 
          <!-- Footer -->
-            <footer id="footer">
-				<div class="inner" style = "font-family: 휴먼편지체;">
-					<section>
-										<h2>[회원정보]</h2>
-										<p>
-										<?php
-											if ($_SESSION['id'] == "admin")
-											{
-												echo "관리자 계정으로 로그인 했습니다.";
-											}
-											else if(($_SESSION['id'] == "worldbest5") || ($_SESSION['id'] == "worldbest6") || ($_SESSION['id'] == "worldbest7"))
-											{
-												echo "직원 계정으로 로그인 했습니다.";
-											}
-											else
-											{
-												echo "<h2>ID : ". $_SESSION['id'] . "</h2>";
-											}
-										?>
-										</p>
-					</section>
+         <!-- Footer -->
+           <footer id="footer">
+             <div class="inner" style = "font-family: consolas;">
+               <section>
+                                         <h2>[회원정보]</h2>
+                                         <p>
+                         <?php
+
+                         if($member["sJob"] != NULL)
+                         {
+                           if ($member["sJob"] == "관리자")
+                           {
+                             echo "관리자 계정으로 로그인 했습니다.";
+                           }
+                           else
+                           {
+                             echo "직원 계정으로 로그인 했습니다.";
+                           }
+                         }
+                         else
+                         {
+                           echo "ID : ". $_SESSION['id'];
+                         }
+                         ?>
+                         </p>
+               </section>
 
 				</div>
 			</footer>

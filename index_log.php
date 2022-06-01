@@ -1,4 +1,4 @@
-﻿<?php @session_start();?>
+﻿﻿<?php @session_start();?>
 <?php
 
 	if ($_SESSION['id'] == NULL)
@@ -31,14 +31,14 @@
 									<span class="symbol"><img src=logos.jpg width="30%" alt"" /></span><span class="title"></span>
 							 </div>
 							 </a>
-							 <p style = "text-align:right; font-family: 휴먼편지체;  ">
+							 <p style = "text-align:right; font-family: consolas;  ">
 	 							[회원정보]<br>
 	 							<?php
 
 								header("Content-Type:text/html; charset=UTF-8");
 									 include("connect.php");
 									 $connect= dbconn();
-								session_start();
+
 								$id= $_SESSION["id"];
 
 								$query=" select * from usertbl where userID='$id'";
@@ -52,7 +52,10 @@
 		 								{
 		 									echo "관리자 계정으로 로그인 했습니다.";
 		 								}
-										echo "직원 계정으로 로그인 했습니다.";
+										else
+										{
+											echo "직원 계정으로 로그인 했습니다.";
+									  }
 									}
 	 								else
 	 								{
@@ -80,14 +83,17 @@
 							<li><a href="order_view.php">주문내역</a></li>
 							<li><a href="contact.php">문의하기</a></li>
 							<?php
+							if($member["sJob"] != NULL)
+							{
 								if ($_SESSION['id'] == "admin")
 								{
 									echo "<li><a href='admin.php'>관리자 설정</a></li>";
 								}
-								else if(($_SESSION['id'] == "worldbest5") || ($_SESSION['id'] == "worldbest6") || ($_SESSION['id'] == "worldbest7"))
+								else
 								{
 									echo "<li><a href='admin.php'>직원 설정</a></li>";
 								}
+							}
 							?>
 							<li> <a href='logout.php'> 로그아웃 </a></li>
 						</ul>
@@ -108,19 +114,26 @@
 
 				<!-- Footer -->
 					<footer id="footer">
-						<div class="inner" style = "font-family: 휴먼편지체;">
+						<div class="inner" style = "font-family: consolas;">
 							<section>
 				                                <h2>[회원정보]</h2>
                               					<p>
 												<?php
+
+
 													if ($_SESSION['id'] == "admin")
 													{
 														echo "관리자 계정으로 로그인 했습니다.";
+													}
+													else if($member["sJob"] != NULL)
+													{
+														echo "직원 계정으로 로그인 했습니다.";
 													}
 													else
 													{
 														echo "<h2>ID : ". $_SESSION['id'] . "</h2>";
 													}
+
 												?>
 												</p>
 							</section>

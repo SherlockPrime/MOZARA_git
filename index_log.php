@@ -138,6 +138,23 @@
 											   }
 												?>
 												</p>
+								
+								    <hr width = '1200px'>
+                                    <p style = "font-size: 12px;">
+                                    <?php
+                                    $query33=" select * from company limit 1";
+
+                                    $result33= mysqli_query($connect,$query33);
+                                    $member33= mysqli_fetch_array($result33);
+
+                                    echo "상호: ". $member33['cpyName'] . "</br>";
+                                    echo "전화번호: ". $member33['cpyPhNum'] . "</br>";
+                                    echo "주소: ". $member33['cpyAddr'] . "</br>";
+                                    echo "이메일: ". $member33['cpyEmail'] . "</br>";
+                                    echo "대표: ". $member33['cpyCEO'] . "</br>";
+                                     ?>
+                                   </p>
+								
 							</section>
 
 						</div>

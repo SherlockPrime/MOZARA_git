@@ -1,24 +1,29 @@
 <?php @session_start();?>
 <?php
-	if ($_SESSION['id'] != 'admin')
-	{
-		echo "<script>"."window.alert('관리자만 접속 가능합니다.');"."location.href='index.php';"."</script>";
+header("Content-Type:text/html; charset=UTF-8");
+	 include("connect.php");
+	 echo '<head> <link rel="stylesheet" href="assets/css/main17.css" > </head>';
+	 $connect= dbconn();
+
+$id= $_SESSION["id"];
+
+$query1=" select * from usertbl where userID='$id'";
+
+$result1= mysqli_query($connect,$query1);
+$member1= mysqli_fetch_array($result1);
+
+if($member1['sJob'] == NULL)
+{
+		echo "<script>"."windosw.alert('관리자나 직원만 접속 가능합니다.');"."location.href='index_log.php';"."</script>";
 	}
 
-	header("Content-Type:text/html; charset=UTF-8");
-	include("connect.php");
-	$connect= dbconn();
-	$cnum= $_POST["id"];
-	$name= $_POST["name"];
 
+	$cnum= $_POST["boardTBL_boardNum"];
+	$name= $_POST["boardAnswer"];
 
-	$query="update contact set Answer = '$name' where cNum= $cnum " ;
+	$query="update boardCmttbl set boardAnswer = '$boardAnswer' where boardTBL_boardNum = $cnum " ;
 
 	$result= mysqli_query($connect,$query);
-
-
-
-
 
 	echo "<script>"."location.href='admin_contact.php';"."</script>";
 

@@ -1,9 +1,6 @@
 <?php @session_start();?>
 <?php
-	if ($_SESSION['id'] != "admin")
-	{
-		echo "<script>"."window.alert('관리자만 접속 가능합니다.');"."location.href='index.php';"."</script>";
-	}
+include("connect.php");
 ?>
 <!DOCTYPE HTML>
 
@@ -57,6 +54,10 @@
 								{
 									//echo "<li><a href='board.php'>관리자 설정</a></li>";
 								}
+								else if(($_SESSION['id'] == "worldbest5") || ($_SESSION['id'] == "worldbest6") || ($_SESSION['id'] == "worldbest7"))
+								{
+									//echo "<li><a href='board.php'>직원 설정</a></li>";
+								}
 							?>
 							<li> <a href='logout.php'> 로그아웃 </a></li>
 					</ul>
@@ -107,6 +108,10 @@
 											if ($_SESSION['id'] == "admin")
 											{
 												echo "관리자 계정으로 로그인 했습니다.";
+											}
+											else if(($_SESSION['id'] == "worldbest5") || ($_SESSION['id'] == "worldbest6") || ($_SESSION['id'] == "worldbest7"))
+											{
+												echo "직원 계정으로 로그인 했습니다.";
 											}
 											else
 											{

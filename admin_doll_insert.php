@@ -17,12 +17,16 @@ if($member1['sJob'] == NULL)
 		echo "<script>"."windosw.alert('관리자나 직원만 접속 가능합니다.');"."location.href='index_log.php';"."</script>";
 	}
 
-	$id= $_POST["id"];
-	$query="delete from boardtbl where boardNum = $id ";
+	$name= $_POST["pdtName"];
+	$price= $_POST["pdt_Price"];
+	$intro= $_POST["pdt_Ctt"];
+	$query="insert into producttbl(pdtNo,pdtName,pdtCat,pdtColor,pdtSize,pdt_Rmn,pdt_Ctt,pdt_Brd,pdt_Price) values( 1, '$name' , 'dff', 'dgds', 'd', 2, '$intro', 'dd', '$price') ";
 
 	$result= mysqli_query($connect,$query);
 
-	echo "<script>"."location.href='admin_contact.php';"."</script>";
+
+	echo "<script>"."location.href='admin_doll.php';"."</script>";
+
 
 
 ?>

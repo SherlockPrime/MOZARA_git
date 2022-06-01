@@ -9,22 +9,22 @@
 	header("Content-Type:text/html; charset=UTF-8");
 	include("connect.php");
 	$connect= dbconn();
-	$name= $_POST["name"];
+	$name= $_POST["boardCtt"];
 
-	$query="select * from member where id ='$_SESSION[id]' ";
+	$query="select * from usertbl where userID ='$_SESSION[id]' ";
 
 	$result= mysqli_query($connect,$query);
 	$member= mysqli_fetch_array($result);
 
-	$mnum = $member['mnum'];
+	$mnum = $member['userID'];
 
-	$query="insert into contact(mnum,Contact) values( '$mnum' , '$name' ) ";
+	$query="insert into boardtbl(boardNum,boardCat,boardTit,boardCtt,boardDate,userTBL_userID) values( 1, 'dd', 'dd', '$name', 1970-01-01 00:00:00, '$mnum') ";
 
 	$result= mysqli_query($connect,$query);
 
 	echo "<script>"."location.href='contact.php';"."</script>";
 
-	
+
 
 
 ?>

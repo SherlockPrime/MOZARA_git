@@ -115,11 +115,11 @@
                            <div class="1u 2u$(xsmall)">
                               <input type="text" name="userPh_1" id="phone1" value"" placeholder="전화번호(*)" required />
                            </div>
-                           <p>─</p>
+
                            <div class="2u 4u$(xsmall)">
                               <input type="text" name="userPh_2" id="phone2" value"" placeholder="전화번호(*)" required />
                            </div>
-                           <p>─</p>
+
                            <div class="2u 4u$(xsmall)">
                               <input type="text" name="userPh_3" id="phone3" value"" placeholder="전화번호(*)" required />
                            </div>
@@ -138,7 +138,7 @@
                         -->
 
                         <div class="2u 4u$(xsmall)">
-                           <select name="userAddr_do" onChange="cat1_change(this.value,h_area2)" >
+                           <select name="userAddr_do" onChange="cat1_change(this.value,userAddr_si)" >
                               <option value="none">도(*)</option>
                               <option value='1'>서울특별시</option>
                               <option value='2'>부산광역시</option>
@@ -167,9 +167,28 @@
                            <input type="text" name="userAddr_doro" id="adrDoro" value"" placeholder="도로명(*)" required />
                         </div>
 
-                           <div class="6u 12u$(xsmall)">
+                           <div class="4u 8u$(xsmall)">
                               <input type="password" name="userPwd_ch" id="pwdCh" value="" placeholder="비밀번호 확인(*)" required />
                            </div>
+                           <div>
+                           <input type="button" onclick="test()" value="확인">
+                         </div>
+                           <br />
+                           <script type="text/javascript">
+    function test() {
+      var p1 = document.getElementById('pwdCh').value;
+      var p2 = document.getElementById('pwd').value;
+      if( p1 != p2 ) {
+        alert("비밀번호가 일치 하지 않습니다");
+        return false;
+      } else{
+        alert("비밀번호가 일치합니다");
+        return true;
+      }
+
+    }
+  </script>
+
                            <div class="6u 12u$(xsmall)">
                               <input type="text" name="userAddr_det" id="userDet" value"" placeholder="상세주소(*)" required />
                            </div>

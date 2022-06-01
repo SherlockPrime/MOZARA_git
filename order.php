@@ -19,19 +19,19 @@
 
 
 
-	$query="select * from member where id ='$id' ";
+	$query="select * from usertbl where userID ='$id' ";
 
 	$result= mysqli_query($connect,$query);
 	$member= mysqli_fetch_array($result);
 
-	$mnum = $member['mnum'];
+	$mnum = $member['userTBL_userID'];
 
-	$query="select * from orders where dNum ='$dnum' and mnum = '$mnum'  ";
+	$query="select * from ordertbl where ordNo ='$dnum' and userTBL_userID = '$mnum'  ";
 
 	$result= mysqli_query($connect,$query);
 	if ($member= mysqli_fetch_array($result) )
 	{
-		$query="update orders set Count = Count +1, TotalPrice = TotalPrice + $price where oNum= '$member[oNum]' " ;
+		$query="update ordertbl set Count = Count +1, TotalPrice = TotalPrice + $price where oNum= '$member[oNum]' " ;
 
 		$result= mysqli_query($connect,$query);
 	}

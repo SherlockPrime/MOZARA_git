@@ -70,14 +70,14 @@
 			include("connect.php");
 			$connect= dbconn();
 
-		    $query=" select * from member where id = '$_SESSION[id]' ";
+		    $query=" select * from usertbl where userID = '$_SESSION[id]' ";
 
 			$result= mysqli_query($connect,$query);
 			$member = mysqli_fetch_array($result);
 
 
 
-			$query=" select * from contact where mnum = $member[mnum] ";
+			$query=" select * from boardtbl where userTBL_userID = '$_SESSION[id]' ";
 
 			$result= mysqli_query($connect,$query);
 
@@ -86,20 +86,24 @@
 			while( $member = mysqli_fetch_array($result)  )
 			{
 				echo "<tr height=80>";
-				echo "<th >" . $member['cNum']     .  "</th>";
+				echo "<th >" . $member['boardNum']     .  "</th>";
 
 
 
-				echo "<th>" . $member['Contact']     .  "</th>";
+				echo "<th>" . $member['boardCtt']     .  "</th>";
 				echo "<form method='post' action='contact_delete.php'>";
-				echo "<th>" . " <input type = hidden   value= $member[cNum] name = 'name' ><input type=submit  value = '삭제'  >   " .  "</th>" ;
+				echo "<th>" . " <input type = hidden   value= $member[boardNum] name = 'name' ><input type=submit  value = '삭제'  >   " .  "</th>" ;
 				echo "</form>";
 				echo "</tr>";
 				echo "<tr height=80>";
 
-				if ( $member["Answer"] != NULL  )
+				$query=" select * from boardcmttbl where boardTBL_boardNum = $member[boardNum] ";
+
+				$result= mysqli_query($connect,$query);
+
+				if ( $member["boardAnswer"] != NULL  )
 				{
-					echo "<th colspan=3> 문의 답변 : $member[Answer] </th> ";
+					echo "<th colspan=3> 문의 답변 : $member[boardAnswer] </th> ";
 				}
 				else
 				{
@@ -111,7 +115,7 @@
 			echo "<tr height=80> ";
 			echo "<form method='post' action='contact_post.php'>";
 			echo "<td>" . "NEW 문의"    .  "</td>";
-			echo "<td>" . "<input type = text placeholder='문의내용' name='name'>"     .  "</td>";
+			echo "<td>" . "<input type = text placeholder='문의내용' name='boardCtt'>"     .  "</td>";
 			echo "<td>" . "<input type=submit  value = '추가'  >"   .  "</td>" ;
 
 			echo "</form>";

@@ -1,5 +1,6 @@
 ﻿<?php @session_start();?>
 <?php
+
 	if ($_SESSION['id'] == NULL)
 	{
 		echo "<script>"."window.alert('로그인이 필요합니다.');"."location.href='index.php';"."</script>";
@@ -34,12 +35,25 @@
 	 							[회원정보]<br>
 	 							<?php
 
+								header("Content-Type:text/html; charset=UTF-8");
+									 include("connect.php");
+									 $connect= dbconn();
+								session_start();
+								$id= $_SESSION["id"];
 
+								$query=" select * from usertbl where userID='$id'";
 
-	 								if ($_SESSION['id'] == "admin")
-	 								{
-	 									echo "관리자 계정으로 로그인 했습니다.";
-	 								}
+								$result= mysqli_query($connect,$query);
+								$member= mysqli_fetch_array($result);
+
+	 								if($member["sJob"] != NULL)
+									{
+										if ($_SESSION['id'] == "admin")
+		 								{
+		 									echo "관리자 계정으로 로그인 했습니다.";
+		 								}
+										echo "직원 계정으로 로그인 했습니다.";
+									}
 	 								else
 	 								{
 	 									echo "ID : ". $_SESSION['id'];
@@ -69,6 +83,10 @@
 								if ($_SESSION['id'] == "admin")
 								{
 									echo "<li><a href='admin.php'>관리자 설정</a></li>";
+								}
+								else if(($_SESSION['id'] == "worldbest5") || ($_SESSION['id'] == "worldbest6") || ($_SESSION['id'] == "worldbest7"))
+								{
+									echo "<li><a href='admin.php'>직원 설정</a></li>";
 								}
 							?>
 							<li> <a href='logout.php'> 로그아웃 </a></li>

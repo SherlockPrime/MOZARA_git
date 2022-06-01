@@ -91,30 +91,30 @@
 			$connect= dbconn();
 
 
-			$search = $_POST["name"];
+			$search = $_POST["pdtName"];
 			$fillter = $_GET["id"];
 
 			if ($fillter == NULL)
 			{
 				if ($search  == NULL)
 				{
-					$query=" select * from doll";
+					$query=" select * from producttbl";
 				}
 				else
 				{
-					$query=" select * from doll where Name Like( '$search%' ) ";
+					$query=" select * from producttbl where pdtName Like( '%$search%' ) ";
 				}
 			}
 			else
 			{
 				if ($fillter == "이름")
-					$query=" select * from doll order by Name";
+					$query=" select * from producttbl order by pdtName";
 				if ($fillter == "인기")
-					$query=" select * from doll order by Love desc";
+					$query=" select * from producttbl order by pdtNo";
 				if ($fillter == "낮은가격")
-					$query=" select * from doll order by Price";
+					$query=" select * from producttbl order by pdt_Price";
 				if ($fillter == "높은가격")
-					$query=" select * from doll order by Price desc";
+					$query=" select * from producttbl order by pdt_Price desc";
 			}
 
 			$result= mysqli_query($connect,$query);
@@ -123,11 +123,11 @@
 			{
 				echo "<article >";
 				echo "<span class='image'>";
-				echo "<img src=$member[Name].jpg alt=''  >";
+				echo "<img src=$member[pdtName].jpg alt=''  >";
 				echo "</span>";
 				echo "<a   >";
-				echo "<div class='content' onClick=Check_order('$member[Name]','$member[dNum]','$member[Price]') style='cursor:pointer;'>";
-				echo "<p><h1 style='color:rgb(255,255,255);'>$member[Name] <br>  $member[Price]원 <br> $member[Intro] <br> ♥ $member[Love] </h1></p>";
+				echo "<div class='content' onClick=Check_order('$member[pdtName]','$member[pdtNo]','$member[pdt_Price]') style='cursor:pointer;'>";
+				echo "<p><h1 style='color:rgb(255,255,255);'>$member[pdtName] <br>  $member[pdt_Price]원 <br> $member[pdt_Ctt] <br> ♥ $member[pdtNo] </h1></p>";
 				echo "</div>";
 				echo "</a>";
 				echo "</article>";

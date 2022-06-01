@@ -1,4 +1,4 @@
-﻿﻿<?php @session_start();?>
+﻿<?php @session_start();?>
 <?php
 
 	if ($_SESSION['id'] == NULL)
@@ -46,21 +46,21 @@
 								$result= mysqli_query($connect,$query);
 								$member= mysqli_fetch_array($result);
 
-	 								if($member["sJob"] != NULL)
-									{
-										if ($_SESSION['id'] == "admin")
-		 								{
-		 									echo "관리자 계정으로 로그인 했습니다.";
-		 								}
-										else
-										{
-											echo "직원 계정으로 로그인 했습니다.";
-									  }
-									}
-	 								else
-	 								{
-	 									echo "ID : ". $_SESSION['id'];
-	 								}
+								if($member["sJob"] != NULL)
+								 {
+									 if ($member["sJob"] == "관리자")
+									 {
+										 echo "관리자 계정으로 로그인 했습니다.";
+									 }
+									 else
+									 {
+										 echo "직원 계정으로 로그인 했습니다.";
+									 }
+								 }
+								 else
+								 {
+									 echo "ID : ". $_SESSION['id'];
+								 }
 	 							?>
 	 						</p>
 							<hr width ="100%"></hr>
@@ -85,7 +85,7 @@
 							<?php
 							if($member["sJob"] != NULL)
 							{
-								if ($_SESSION['id'] == "admin")
+								if ($member["sJob"] == "관리자")
 								{
 									echo "<li><a href='admin.php'>관리자 설정</a></li>";
 								}
@@ -121,19 +121,21 @@
 												<?php
 
 
-													if ($_SESSION['id'] == "admin")
-													{
-														echo "관리자 계정으로 로그인 했습니다.";
-													}
-													else if($member["sJob"] != NULL)
-													{
-														echo "직원 계정으로 로그인 했습니다.";
-													}
-													else
-													{
-														echo "<h2>ID : ". $_SESSION['id'] . "</h2>";
-													}
-
+											  if($member["sJob"] != NULL)
+											   {
+											     if ($member["sJob"] == "관리자")
+											     {
+											       echo "관리자 계정으로 로그인 했습니다.";
+											     }
+											     else
+											     {
+											       echo "직원 계정으로 로그인 했습니다.";
+											     }
+											   }
+											   else
+											   {
+											     echo "ID : ". $_SESSION['id'];
+											   }
 												?>
 												</p>
 							</section>

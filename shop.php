@@ -21,7 +21,7 @@
 		 <script>
 			function Check_order(name,num,price)
 			{
-
+			//		location.replace('hat_detail.php');
 				if ( confirm("이 상품[ " + name + " ]을 구매 할까요?") == true  )
 				{
 					location.assign("order.php?" + "id=" + num + "&price=" + price);
@@ -30,7 +30,6 @@
 				{
 
 				}
-
 			}
 		 </script>
    </head>
@@ -121,16 +120,31 @@
 
 			while( $member = mysqli_fetch_array($result)  )
 			{
+#echo "<form method='post' action='hat_detail.php'>";
+
 				echo "<article >";
-				echo "<span class='image'>";
-				echo "<img src=$member[pdtName].jpg alt=''  >";
-				echo "</span>";
-				echo "<a   >";
-				echo "<div class='content' onClick=Check_order('$member[pdtName]','$member[pdtNo]','$member[pdt_Price]') style='cursor:pointer;'>";
+			#	echo "<span class='image'>";
+				#echo "<img src=$member[pdtName].jpg alt=''  >";
+			#	echo "$_GET['pdtName']=$member[pdtName]";
+			#	echo "</span>";
+
+         #   echo "<div class='content' onClick= location.href='hat_detail.php' style='cursor:pointer;' value = '$member[pdtName]' name = 'pdtName'>";
+         #   echo "<p><h1 style='color:rgb(255,255,255);'>$member[pdtName] <br>  $member[pdt_Price]원 <br> $member[pdt_Ctt] <br> ♥ $member[pdtNo] </h1></p>";
+         #   echo "</div>";
+				 echo "<form method='post' action='hat_detail.php'>";
+				#echo "<a href='hat_detail.php'?pdtNo='<%=request.getString('$member[pdtNo]')%>' >";
+				echo "<a	>";
+				echo "<div class='content'>";
+				#echo "<div class='content' onClick= location.href='hat_detail.php' style='cursor:pointer;'>";
+				#echo "<div class='content' onClick=Check_order('$member[pdtName]','$member[pdtNo]','$member[pdt_Price]') style='cursor:pointer;'>";
+				echo "<Input type='hidden' name='pdtNo' value='$member[pdtNo]'>";
+				echo "<Input type='image' src='$member[pdtName].jpg' alt='' >";
 				echo "<p><h1 style='color:rgb(255,255,255);'>$member[pdtName] <br>  $member[pdt_Price]원 <br> $member[pdt_Ctt] <br> ♥ $member[pdtNo] </h1></p>";
 				echo "</div>";
 				echo "</a>";
+				echo "</form>";
 				echo "</article>";
+			#	echo "</form>";
 
 			}
 

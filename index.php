@@ -57,7 +57,7 @@
 						<div class="inner">
 							<section>
                                                                 <h2>Login</h2>
-                                                                <form method="post" action="login_post.php">
+																																                   <form method="post" action="login_post.php">
                                                                         <div class="field half first">
                                                                                 <input type="text" name="id" id="id" placeholder="ID" />
                                                                         </div>
@@ -68,10 +68,27 @@
                                                                                 <li><input type="submit" value="Login" class="special"/></li>
                                                                         </ul>
                                                                 </form>
+																																<hr width = '1200px'>
+																																<p style = "font-size: 12px;">
+																																<?php
+																																header("Content-Type:text/html; charset=UTF-8");
+																																	 include("connect.php");
+																																	 $connect= dbconn();
+																																$query33=" select * from company limit 1";
+																																$result33= mysqli_query($connect, $query33);
+																																$member33= mysqli_fetch_array($result33);
 
+																																echo "상호: ". $member33['cpyName'] . "</br>";
+																																echo "전화번호: ". $member33['cpyPhNum'] . "</br>";
+																																echo "주소: ". $member33['cpyAddr'] . "</br>";
+																																echo "이메일: ". $member33['cpyEmail'] . "</br>";
+																																echo "대표: ". $member33['cpyCEO'] . "</br>";
+																																 ?>
+																																</p>
 							</section>
 
 						</div>
+
 					</footer>
 
 			</div>

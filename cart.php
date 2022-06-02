@@ -154,8 +154,9 @@
                                 echo "총결제액 : " . $sum . "</br></br>";
 
                                 echo "<form method='post' action='order.php'>";
-                                  echo "<Input type='hidden' name='cartuserid' value='$cartuserid'>";
-                                  echo "<Input type='hidden' name='cartuserid' value=$sum>";
+                                #	 echo "<Input type='hidden' name='date' value='$dateString'>";
+                                  echo "<Input type='hidden' name='sum' value=$sum>";
+                                #  $dateString = date("Y-m-d", time());
                                   echo "<Input type='submit' value='결제'>";
 
                                 echo "</form>";

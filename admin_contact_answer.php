@@ -14,14 +14,17 @@ $member1= mysqli_fetch_array($result1);
 
 if($member1['sJob'] == NULL)
 {
-		echo "<script>"."windosw.alert('관리자나 직원만 접속 가능합니다.');"."location.href='index_log.php';"."</script>";
+		echo "<script>"."window.alert('관리자나 직원만 접속 가능합니다.');"."location.href='index_log.php';"."</script>";
 	}
 
 
-	$cnum= $_POST["boardTBL_boardNum"];
-	$name= $_POST["boardAnswer"];
+	$cnum= $_POST["cnum"];
+	$name= $_POST["name"];
 
-	$query="update boardCmttbl set boardAnswer = '$boardAnswer' where boardTBL_boardNum = $cnum " ;
+	$query2= "select * from boardtbl where boardNum = $cnum";
+	$result3= mysqli_query($connect, $query2);
+	$member2 = mysqli_fetch_array($result3);
+	$query="insert into boardcmttbl(userTBL_userID, boardTBL_boardNum, boardAnswer) values('$member2[userTBL_userID]', $cnum, '$name')";
 
 	$result= mysqli_query($connect,$query);
 

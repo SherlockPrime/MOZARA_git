@@ -12,9 +12,9 @@ $query1=" select * from usertbl where userID='$id'";
 $result1= mysqli_query($connect,$query1);
 $member1= mysqli_fetch_array($result1);
 
-if($member1['sJob'] == NULL)
+if($member1['sJob'] == 'NULL')
 {
-		echo "<script>"."windosw.alert('관리자나 직원만 접속 가능합니다.');"."location.href='index_log.php';"."</script>";
+		echo "<script>"."window.alert('관리자나 직원만 접속 가능합니다.');"."location.href='index_log.php';"."</script>";
 	}
 
 	$query=" select * from boardtbl";
@@ -37,13 +37,13 @@ if($member1['sJob'] == NULL)
 		echo "<td>" . $member['boardCtt']     .  "</td>";
 
 		echo "<form method='post' action='admin_contact_delete.php'> ";
-		echo "<td>" . "<input type = hidden   value='$member[boardNum]' name = 'id' ><input type=submit  value = '삭제'  >  " .  "</td>" ;
+		echo "<td>" . "<input type = hidden   value='$member[boardNum]' name = 'name' ><input type=submit  value = '삭제'  >  " .  "</td>" ;
 		echo "</form>";
 		echo "</tr>";
 		echo "<tr height=80>";
 		echo "<form method='post' action='admin_contact_answer.php'>";
 
-		$query3=" select * from boardCmttbl where userTBL_userID = '$member2[userID]' ";
+		$query3=" select * from boardCmttbl where userTBL_userID = '$member2[userID]' AND boardTBL_boardNum = $member[boardNum] ";
 
 		$result3= mysqli_query($connect,$query3);
 		$member3 = mysqli_fetch_array($result3);
@@ -54,7 +54,7 @@ if($member1['sJob'] == NULL)
 		}
 		else
 		{
-			echo "<th colspan=3> <input type = text placeholder='답변 쓰기' name='name'> <input type = hidden   value=$member[boardNum] name = 'id' >  </th> ";
+		echo "<th colspan=3> <input type = text placeholder='답변 쓰기' name = 'name'> <input type = hidden   value=$member[boardNum] name = 'cnum' >  </th> ";
 			echo "<th>" . "<input type=submit  value = '답변'  >"   .  "</th>" ;
 		}
 		echo "</form>";

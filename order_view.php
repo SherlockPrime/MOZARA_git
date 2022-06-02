@@ -69,43 +69,66 @@
 			include("connect.php");
 			$connect= dbconn();
 
-		    $query=" select * from member where id = '$_SESSION[id]' ";
+		#    $query=" select * from member where id = '$_SESSION[id]' ";
 
-			$result= mysqli_query($connect,$query);
-			$member = mysqli_fetch_array($result);
+		#	$result= mysqli_query($connect,$query);
+	#		$member = mysqli_fetch_array($result);
 
+$userid = $_SESSION['id'];
 
-
-			$query=" select * from orders where mnum = $member[mnum] ";
+			$query="select * from ordertbl where userTBL_userID = '$userid'";
 
 			$result= mysqli_query($connect,$query);
 
 			echo "<table>";
-			echo "<tr> <th> 주문번호 </th> <th> 사진 </th>  <th> 상품이름 </th> <th> 갯수 </th> <th> 가격 </th> <td> X </td>  </tr> ";
+			echo "<tr> <th> 주문번호 </th> <th> 상품이름 </th> <th> 수량 </th> <th> 총액 </th> </tr> ";
 			while( $member = mysqli_fetch_array($result)  )
 			{
 				echo "<tr>";
-				echo "<th>" . $member['oNum']     .  "</th>";
+				echo "<th>" . $member['ordNo']     .  "</th>";
 
-				$query1=" select * from doll where dNum = '$member[dNum]' ";
+				$query1="select * from producttbl where pdtNo in (select productTBL_pdtNo from orddettbl where orderTBL_ordNo = $member[ordNo]) ";
 
 				$result1= mysqli_query($connect,$query1);
 				$member1 = mysqli_fetch_array($result1);
 
-				echo "<th >" .  "<image src = $member1[Name].jpg  width=100px height=100px style='left:30px;' >"    .  "</th>";
+				#echo "<th >" .  "<image src = $member1[pdtName].jpg  width=100px height=100px style='left:30px;' >"    .  "</th>";
 
-				$query2=" select * from member where mnum = '$member[mnum]' ";
+				$query2="select * from orddettbl where orderTBL_ordNo = $member[ordNo] ";
 
 				$result2= mysqli_query($connect,$query2);
 				$member2 = mysqli_fetch_array($result2);
 
+				$query23="select ordDetNum from orddettbl where orderTBL_ordNo = $member[ordNo] ";
 
-				echo "<th>" . $member1['Name']     .  "</th>";
-				echo "<th>" . $member['Count']     .  "</th>";
-				echo "<th>" . $member['TotalPrice']     .  "</th>";
-				echo "<form method='post' action='order_delete.php'>";
-				echo "<th>" . " <input type = hidden   value= $member[oNum] name = 'id' ><input type=submit  value = '삭제'  >   " .  "</th>" ;
-				echo "</form>";
+				$result23= mysqli_query($connect,$query23);
+				echo "<th>";
+				while($member23 = mysqli_fetch_array($result23))
+				{
+
+					$query234="select * from producttbl where pdtNo in (select productTBL_pdtNo from orddettbl where ordDetNum = $member23[ordDetNum]) ";
+					$result234= mysqli_query($connect,$query234);
+					$member234 = mysqli_fetch_array($result234);
+
+					echo $member234['pdtName']		.	"</br>";  #   .  "</th>";
+				}
+				echo "</th>";
+
+				$query233="select ordDet_Qtt, ordDetNum from orddettbl where orderTBL_ordNo = $member[ordNo]";
+
+				$result233= mysqli_query($connect,$query233);
+
+				echo "<th>";
+				while($member233 = mysqli_fetch_array($result233))
+				{
+					$query2346="select ordDet_Qtt from orddettbl where ordDetNum = $member233[ordDetNum]";
+					$result2346= mysqli_query($connect,$query2346);
+					$member2346 = mysqli_fetch_array($result2346);
+
+					echo $member2346['ordDet_Qtt']		.	"</br>";  #   .  "</th>";
+				}
+				echo "</th>";
+				echo "<th>" . $member['ordTot']     .  "</th>";
 				echo "</tr>";
 			}
 

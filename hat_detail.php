@@ -160,7 +160,7 @@
 
                                 $result1= mysqli_query($connect,$query1);
                                 $member1= mysqli_fetch_array($result1);
-                                  echo "$member1[pdt_Ctt]";
+                                  echo "$member1[pdtCat]";
                                   ?>
                               </td>
                           </tr>

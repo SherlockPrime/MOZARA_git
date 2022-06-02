@@ -1,4 +1,4 @@
-﻿<?php @session_start();?>
+<?php @session_start();?>
 <?php
 	if ($_SESSION['id'] == NULL)
 	{
@@ -70,19 +70,15 @@
 			include("connect.php");
 			$connect= dbconn();
 
-		    $query=" select * from usertbl where userID = '$_SESSION[id]' ";
-
-			$result= mysqli_query($connect,$query);
-			$member = mysqli_fetch_array($result);
 
 
-
-			$query=" select * from boardtbl where userTBL_userID = '$_SESSION[id]' ";
+			$ssid = $_SESSION['id'];
+			$query=" select * from boardtbl where userTBL_userID = '$ssid' ";
 
 			$result= mysqli_query($connect,$query);
 
 			echo "<table>";
-			echo "<tr> <th> 문의 번호 </th> <th> 문의 내용 </th> <td> X </td>  </tr> ";
+			echo "<tr> <th> 문의 번호 </th> <th> 문의 내용 </th> <th> 삭제하기 </th>  </tr> ";
 			while( $member = mysqli_fetch_array($result)  )
 			{
 				echo "<tr height=80>";
@@ -97,13 +93,15 @@
 				echo "</tr>";
 				echo "<tr height=80>";
 
-				$query=" select * from boardcmttbl where boardTBL_boardNum = $member[boardNum] ";
 
-				$result= mysqli_query($connect,$query);
 
-				if ( $member["boardAnswer"] != NULL  )
+				$query1=" select * from boardcmttbl where boardTBL_boardNum = $member[boardNum] ";
+
+				$result1= mysqli_query($connect,$query1);
+				$member33 = mysqli_fetch_array($result1);
+				if ( $member33["boardAnswer"] != NULL  )
 				{
-					echo "<th colspan=3> 문의 답변 : $member[boardAnswer] </th> ";
+					echo "<th colspan=3> 문의 답변 : '$member33[boardAnswer]' </th> ";
 				}
 				else
 				{

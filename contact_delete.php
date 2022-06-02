@@ -11,9 +11,14 @@
 	$connect= dbconn();
 	$name= $_POST["name"];
 
-	$query="delete from contact where cNum = $name ";
+	$query="delete from boardcmttbl where boardTBL_boardNum = $name";
+
+	$query1="delete from boardtbl where boardNum = $name";
+
 
 	$result= mysqli_query($connect,$query);
+	$result1= mysqli_query($connect,$query1);
+
 
 	echo "<script>"."location.href='contact.php';"."</script>";
 

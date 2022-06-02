@@ -17,21 +17,6 @@
          <link rel="stylesheet" href="assets/css/main17.css" />
          <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
          <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-
-		 <script>
-			function Check_order(name,num,price)
-			{
-			//		location.replace('hat_detail.php');
-				if ( confirm("이 상품[ " + name + " ]을 구매 할까요?") == true  )
-				{
-					location.assign("order.php?" + "id=" + num + "&price=" + price);
-				}
-				else
-				{
-
-				}
-			}
-		 </script>
    </head>
 
    <body>
@@ -134,13 +119,10 @@
 				 echo "<form method='post' action='hat_detail.php'>";
 				#echo "<a href='hat_detail.php'?pdtNo='<%=request.getString('$member[pdtNo]')%>' >";
 				echo "<a	>";
-				echo "<div class='content'>";
 				#echo "<div class='content' onClick= location.href='hat_detail.php' style='cursor:pointer;'>";
 				#echo "<div class='content' onClick=Check_order('$member[pdtName]','$member[pdtNo]','$member[pdt_Price]') style='cursor:pointer;'>";
 				echo "<Input type='hidden' name='pdtNo' value='$member[pdtNo]'>";
 				echo "<Input type='image' src='$member[pdtName].jpg' alt='' >";
-				echo "<p><h1 style='color:rgb(255,255,255);'>$member[pdtName] <br>  $member[pdt_Price]원 <br> $member[pdt_Ctt] <br> ♥ $member[pdtNo] </h1></p>";
-				echo "</div>";
 				echo "</a>";
 				echo "</form>";
 				echo "</article>";

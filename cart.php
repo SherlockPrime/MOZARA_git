@@ -109,129 +109,62 @@
 
 
               <div id="detail_container">
-                  <section id="detail_img_wrap">
-                    <?php
-#$pdtNm=$_POST["pdtName99"];
-										#$pdtNm=request.getParameter($member['pdtNo']);
-                    $pdtN=$_POST["pdtNo"];
-                    $query1 = "select * from producttbl where pdtNo = '$pdtN'";
 
-                    $result1= mysqli_query($connect,$query1);
-                    $member1= mysqli_fetch_array($result1);
-                      #echo "<img src=$member1[pdtName].jpg' width=150px height=150px>"
-                      echo "<img src='$member1[pdtName].jpg' alt=''  >";
-                      ?>
-                  </section>
                     <section id="detail_wrap">
                       <table id="detail_table">
                           <tr>
-                              <th>브랜드</th>
-
-                               <td>
-                                 <?php
-                                 $pdtN=$_POST["pdtNo"];
-                                 $query1 = "select * from producttbl where pdtNo = '$pdtN'";
-
-                                 $result1= mysqli_query($connect,$query1);
-                                 $member1= mysqli_fetch_array($result1);
-                                   echo "$member1[pdt_Brd]";
-                                   ?>
-                               </td>
-                          </tr>
-                          <tr>
-                              <th>상품명</th>
-                              <td>
+                              <th>
                                 <?php
-                                $pdtN=$_POST["pdtNo"];
-                                $query1 = "select * from producttbl where pdtNo = '$pdtN'";
+                                #$pdtNm=$_POST["pdtName99"];
+                                #$pdtNm=request.getParameter($member['pdtNo']);
+                                #$pdtN=$_POST["pdtNo"];
+                                $cartuserid = $_SESSION['id'];
+                                $query1 = "select * from cart where userTBL_userID = '$cartuserid'";
 
                                 $result1= mysqli_query($connect,$query1);
-                                $member1= mysqli_fetch_array($result1);
-                                  echo "$member1[pdtName]";
-                                  ?>
-                              </td>
-                          </tr>
-                          <tr>
-                              <th>분류</th>
-                              <td>
-                                <?php
-                                $pdtN=$_POST["pdtNo"];
-                                $query1 = "select * from producttbl where pdtNo = '$pdtN'";
+                                #$member1= mysqli_fetch_array($result1);
+                                 $member55 = mysqli_fetch_array($result1);
 
-                                $result1= mysqli_query($connect,$query1);
-                                $member1= mysqli_fetch_array($result1);
-                                  echo "$member1[pdt_Ctt]";
-                                  ?>
-                              </td>
-                          </tr>
-                          <tr>
-                              <th>색상</th>
-                              <td>
-                                <?php
-                                $pdtN=$_POST["pdtNo"];
-                                $query1 = "select * from producttbl where pdtNo = '$pdtN'";
+                                $query2 = "select * from producttbl where pdtNo in (select productTBL_pdtNo from cart where userTBL_userID='$cartuserid')";
+                                $result2 = mysqli_query($connect, $query2);
 
-                                $result1= mysqli_query($connect,$query1);
-                                $member1= mysqli_fetch_array($result1);
-                                  echo "$member1[pdtColor]";
-                                  ?>
-                              </td>
-                          </tr>
-                          <tr>
-                              <th>사이즈</th>
-                              <td>
-                                <?php
-                                $pdtN=$_POST["pdtNo"];
-                                $query1 = "select * from producttbl where pdtNo = '$pdtN'";
+                                $sum = 0;
 
-                                $result1= mysqli_query($connect,$query1);
-                                $member1= mysqli_fetch_array($result1);
-                                  echo "$member1[pdtSize]";
-                                  ?>
-                              </td>
-                          </tr>
-                          <tr>
-                              <th>가격</th>
-                              <<td>
-                                <?php
-                                $pdtN=$_POST["pdtNo"];
-                                $query1 = "select * from producttbl where pdtNo = '$pdtN'";
+                                echo "<table border=1>";
+                                echo "<tr> <th> 사진 </th> <th> 이름 </th> <th> 사이즈 </th> <th> 수량 </th> <th> 총액 </th> <th> 삭제 </th> </tr>";
+                                while( $pdt = mysqli_fetch_array($result2) )
+                                {
+                                  echo "<tr>";
 
-                                $result1= mysqli_query($connect,$query1);
-                                $member1= mysqli_fetch_array($result1);
-                                  echo "$member1[pdt_Price]";
-                                  ?>
-                              </td>
-                          </tr>
-                          <tr>
-                              <th>상품설명</th>
-                              <td>
-                                <?php
-                                $pdtN=$_POST["pdtNo"];
-                                $query1 = "select * from producttbl where pdtNo = '$pdtN'";
+                                  echo "<td>" .  "<image src = $pdt[pdtName].jpg width=150px height=150px >"    .  "</td>";
+                                  echo "<td>" . $pdt['pdtName']     .  "</td>";
+                                  echo "<td>" . $pdt['pdtSize']     .  "</td>";
+                                  echo "<td>" . $member55['Qtt']     .  "</td>";
+                                  echo "<td>" . $pdt['pdt_Price']*$member55['Qtt']     .  "</td>";
+                                  echo "<form method='post' action='cart_del.php'> ";
+                                  echo "<td>" . "<input type = hidden   value='$pdt[pdtNo]' name = 'id' ><input type=submit  value = '삭제'  >  " .  "</td>" ;
+                                  echo "</form>";
+                                  echo "<td>" . " "     .  "</td>";
+                                  echo "</tr>";
 
-                                $result1= mysqli_query($connect,$query1);
-                                $member1= mysqli_fetch_array($result1);
-                                  echo "$member1[pdt_Ctt]";
+                                  $sum += $pdt['pdt_Price']*$member55['Qtt'];
+                      				    }
+
+                                echo "</table>";
+                                echo "총결제액 : " . $sum . "</br></br>";
+
+                                echo "<form method='post' action='order.php'>";
+                                  echo "<Input type='hidden' name='cartuserid' value='$cartuserid'>";
+                                  echo "<Input type='hidden' name='cartuserid' value=$sum>";
+                                  echo "<Input type='submit' value='결제'>";
+
+                                echo "</form>";
                                   ?>
-                              </td>
+                              </th>
+
                           </tr>
 
                       </table>
-<?php
-$pdtN=$_POST["pdtNo"];
-$query1 = "select * from producttbl where pdtNo = '$pdtN'";
-
-$result1= mysqli_query($connect,$query1);
-$member1= mysqli_fetch_array($result1);
-
-                      echo "<form method='post' action='cart_insert.php'>";
-                      	echo "<Input type='hidden' name='pdtNo' value='$member1[pdtNo]'>";
-                    	  echo "<Input type='submit' value='장바구니 담기'>";
-
-                      echo "</form>";
-?>
-
 
                   </section>
               </div>

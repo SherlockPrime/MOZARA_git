@@ -18,11 +18,14 @@
 
 	$mnum = $member['userID'];
 
-	$query="insert into boardtbl(boardNum,boardCat,boardTit,boardCtt,boardDate,userTBL_userID) values( 1, 'dd', 'dd', '$name', 1970-01-01 00:00:00, '$mnum') ";
+	$query="insert into boardtbl(boardCtt,userTBL_userID) values('$name', '$mnum') ";
 
 	$result= mysqli_query($connect,$query);
 
 	echo "<script>"."location.href='contact.php';"."</script>";
+
+
+
 
 
 
